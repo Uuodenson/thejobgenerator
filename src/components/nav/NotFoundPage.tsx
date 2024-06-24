@@ -1,10 +1,15 @@
-import React from 'react';
+import { useRouteError } from "react-router-dom";
 
-const NotFoundPage: React.FC = () => (
-  <div>
-    <h1>404 - Not Found</h1>
-    <p>The page you are looking for does not exist.</p>
-  </div>
-);
+function NotFoundPage() {
+  const error = useRouteError() as { statusText?: string; message?: string };
+  return (
+    <div>
+      <h1>Page Not Found</h1>
+      <p>
+        <i>{error.statusText || error.message || "Unknown error"}</i>
+      </p>
+    </div>
+  );
+}
 
 export default NotFoundPage;

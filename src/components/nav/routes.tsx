@@ -1,21 +1,41 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomePage from './HomePage';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
+import HomePage from "./HomePage";
 import Aufgaben from "./Aufgaben";
-import People from './People';
-import Out from './Closeout';
-import NotFoundPage from './NotFoundPage';
+import People from "./People";
+import Out from "./Closeout";
+import NotFoundPage from "./NotFoundPage";
 
-export const AppRoutes: React.FC = () => (
-  <Router>
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/aufgaben" element={<Aufgaben />} />
-      <Route path="/people" element={<People />} />
-      <Route path="/ausschließen" element={<Out />} />
-      <Route path="*" element={<NotFoundPage />} />
-    </Routes>
-  </Router>
-);
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePage />,
+    errorElement: <NotFoundPage />,
+  },
+
+  {
+    path: "aufgaben",
+    element: <Aufgaben />,
+    errorElement: <NotFoundPage />,
+  },
+  {
+    path: "people",
+    element: <People />,
+    errorElement: <NotFoundPage />,
+  },
+  {
+    path: "ausschließen",
+    element: <Out />,
+    errorElement: <NotFoundPage />,
+  },
+]);
+
+export const AppRoutes: React.FC = () => <RouterProvider router={router} />;
 
 export default AppRoutes;
