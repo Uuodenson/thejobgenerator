@@ -8,7 +8,7 @@ export default function Randomizer() {
     <>
       <Button onClick={() => window.location.reload()}>Ranodmize</Button>
       {aufgaben.map((aufgabe: { name: string }) => {
-        const job = JSON.parse(localStorage.getItem(`${aufgabe.name}`)!);
+        const job = JSON.parse(localStorage.getItem(`${aufgabe.name}`) || "[]");
         const personen_array = [];
         while (personen_array.length < 2) {
           const randomPerson =
@@ -17,6 +17,7 @@ export default function Randomizer() {
             personen_array.push(randomPerson);
           }
         }
+        localStorage.setItem(`${aufgabe.name}`, JSON.stringify(personen_array));
         return (
           <Card>
             <CardTitle>{aufgabe.name}</CardTitle>
