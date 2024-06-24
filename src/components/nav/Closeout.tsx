@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardTitle } from "../ui/card";
 function Out() {
   const [name, setName] = useState("Aufgabe");
-  const aufgaben = [{ Aufgabe: ["Kevin", "Jakob", "Felix"] }];
   const [arraygabe, setArragabe] = useState<string[]>([]);
   let next_aufgabe: Array<string> = [];
   function getchosentext() {
@@ -12,7 +11,8 @@ function Out() {
     ) as HTMLSelectElement;
     const selectedOption = selectElement.options[selectElement.selectedIndex];
     setName(selectedOption.value);
-    next_aufgabe = [JSON.parse(localStorage.getItem(`${name}`))] || [];
+    const storedData = localStorage.getItem(name);
+    next_aufgabe = storedData ? [JSON.parse(storedData)] : [];
     setArragabe(next_aufgabe);
     console.log(arraygabe);
   }
@@ -21,7 +21,11 @@ function Out() {
     return (
       <h1>
         <select name="Aufgaben" id="aufgaben-liste">
-          {JSON.parse(localStorage.getItem("aufgaben")).map((aufgabe) => (
+          {(
+            JSON.parse(localStorage.getItem("aufgaben") || "[]") as Array<{
+              name: string;
+            }>
+          ).map((aufgabe) => (
             <option value={aufgabe.name}>{aufgabe.name}</option>
           ))}
         </select>
@@ -30,7 +34,9 @@ function Out() {
   }
   function setup() {
     const aufgaben = JSON.parse(localStorage.getItem("aufgaben") || "[]");
-    const foundAufgabe = aufgaben.find((aufgabe) => aufgabe.name === name);
+    const foundAufgabe = aufgaben.find(
+      (aufgabe: { name: string }) => aufgabe.name === name
+    );
     if (foundAufgabe) {
       return (
         <>

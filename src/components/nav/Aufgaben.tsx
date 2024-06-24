@@ -3,24 +3,22 @@ import ReactDOM from "react-dom";
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 function Aufgaben() {
   useEffect(() => {
-    setTimeout(() => {
+    const loadAufgaben = (): void => {
       const aufgaben = localStorage.getItem("aufgaben");
       if (aufgaben) {
         const parsedArray = JSON.parse(aufgaben);
-        for (let i = 0; i < parsedArray.length; i++) {
-          const newPanel = document.createElement("div");
-          ReactDOM.render(
-            addWorkPanel(parsedArray[i].name, parsedArray[i].description),
-            newPanel
-          );
-          document?.getElementById("aufgaben").appendChild(newPanel);
-        }
+        const panels = parsedArray.map(
+          (aufgabe: { name: string; description: string }) =>
+            addWorkPanel(aufgabe.name, aufgabe.description)
+        );
+        document?.getElementById("aufgaben")?.append(...panels);
       }
-    }, 1000); // 2 seconds
+    };
+    setTimeout(loadAufgaben, 1000);
   }, []);
 
   return (
@@ -35,7 +33,7 @@ function Aufgaben() {
       <Button
         className="mt-4"
         onClick={() => {
-          const storage: Array<{ name: string; description: string }> = [];
+          const storage = [];
           const names = document.querySelectorAll("#name");
           const description = document.querySelectorAll("#description");
           for (let i = 0; i < names.length; i++) {
