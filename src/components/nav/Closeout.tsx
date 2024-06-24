@@ -78,6 +78,9 @@ function Out() {
 
   return (
     <div>
+      <div className="flex flex-wrap flex-row justify-start">
+        <Button onClick={() => window.history.back()}>Back</Button>
+      </div>
       {chooseaufgaben()}
       <Button onClick={getchosentext}>Set</Button>
       <h1>{name}</h1>

@@ -23,7 +23,13 @@ function Aufgaben() {
 
   return (
     <div>
-      <h1 className="text-5xl mb-4">Aufgaben</h1>
+      <div className="flex flex-row- justify-start">
+        <Button onClick={() => window.history.back()}>Back</Button>
+      </div>
+      <div>
+        <h1 className="text-5xl mb-4">Aufgaben</h1>
+      </div>
+
       <p>Hier sind die aufgaben</p>
       <div
         className="flex flex-wrap flex-row justify-center"
@@ -85,6 +91,7 @@ const InputForm = () => {
 };
 
 const addWorkPanel = (name: string, description: string) => {
+  console.log(name, description);
   const parent = document.getElementById("aufgaben");
   if (parent) {
     const newPanel = document.createElement("div");
