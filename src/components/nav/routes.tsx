@@ -7,7 +7,7 @@ import Out from "./Closeout";
 import NotFoundPage from "./NotFoundPage";
 
 export const AppRoutes: React.FC = () => (
-  <Routes basename="/thejobgenerator/">
+  <Routes>
     <Route path="/" element={<HomePage />} />
     <Route path="/aufgaben" element={<Aufgaben />} />
     <Route path="/people" element={<People />} />
