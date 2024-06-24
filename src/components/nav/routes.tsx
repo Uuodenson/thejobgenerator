@@ -8,7 +8,7 @@ import NotFoundPage from "./NotFoundPage";
 
 const router = createHashRouter([
   {
-    path: "/",
+    path: "/thejobgenerator",
     element: <HomePage />,
     errorElement: <NotFoundPage />,
   },
