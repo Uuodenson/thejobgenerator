@@ -1,34 +1,41 @@
-import React from "react";
-import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
-import { Terminal } from "lucide-react";
+// import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
+// import { Terminal } from "lucide-react";
 import { Button } from "../ui/button";
 import { Card, CardTitle, CardDescription, CardContent } from "../ui/card";
 import Randomizer from "./ranomizer/Ranomzier";
 
 function HomePage() {
-  function setAlert(time: number, title: string, description: string) {
-    setTimeout(() => {
-      const alert = document.getElementById("alert");
-      if (alert) {
-        alert.remove();
-      }
-    }, time * 1000);
-    return (
-      <Alert id="alert" className="w-60 h-20">
-        <Terminal></Terminal>
-        <AlertTitle>{title}</AlertTitle>
-        <AlertDescription>{description}</AlertDescription>
-        <Button
-          onClick={() => {
-            document.getElementById("alert")?.remove();
-          }}
-        >
-          Close
-        </Button>
-      </Alert>
-    );
-  }
-  function ButtonCard({ title, description = "Description", location }) {
+  // function setAlert(time: number, title: string, description: string) {
+  //   setTimeout(() => {
+  //     const alert = document.getElementById("alert");
+  //     if (alert) {
+  //       alert.remove();
+  //     }
+  //   }, time * 1000);
+  //   return (
+  //     <Alert id="alert" className="w-60 h-20">
+  //       <Terminal></Terminal>
+  //       <AlertTitle>{title}</AlertTitle>
+  //       <AlertDescription>{description}</AlertDescription>
+  //       <Button
+  //         onClick={() => {
+  //           document.getElementById("alert")?.remove();
+  //         }}
+  //       >
+  //         Close
+  //       </Button>
+  //     </Alert>
+  //   );
+  // }
+  function ButtonCard({
+    title,
+    description = "Description",
+    location,
+  }: {
+    title: string;
+    description?: string;
+    location: string;
+  }) {
     return (
       <Card className="w-40 h-40">
         <CardTitle className="mb-5 mt-5">{title}</CardTitle>

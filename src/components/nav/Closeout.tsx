@@ -42,13 +42,15 @@ function Out() {
         <>
           <div className="flex flex-wrap flex-row justify-center">
             <div id="aufgaben-div" className="flex flex-wrap flex-row"></div>
-            {JSON.parse(localStorage.getItem("personen")).map((personen) => (
+            {(
+              JSON.parse(localStorage.getItem("personen") || "[]") as string[]
+            ).map((personen: string) => (
               <Card>
                 <CardTitle id={personen}>{personen}</CardTitle>
                 <Button
                   onClick={() => {
                     if (next_aufgabe.includes(personen)) {
-                      next_aufgabe.splice(personen, 1);
+                      next_aufgabe.splice(next_aufgabe.indexOf(personen), 1);
                       alert("Removed");
                     }
                   }}
