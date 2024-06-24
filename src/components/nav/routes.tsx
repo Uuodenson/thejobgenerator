@@ -1,18 +1,17 @@
 import React from "react";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createHashRouter } from "react-router-dom";
 import HomePage from "./HomePage";
 import Aufgaben from "./Aufgaben";
 import People from "./People";
 import Out from "./Closeout";
 import NotFoundPage from "./NotFoundPage";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <HomePage />,
     errorElement: <NotFoundPage />,
   },
-
   {
     path: "aufgaben",
     element: <Aufgaben />,
