@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { Card, CardTitle, CardDescription, CardContent } from "../ui/card";
@@ -7,7 +6,15 @@ import Randomizer from "./ranomizer/Ranomzier";
 function HomePage() {
   const navigate = useNavigate();
 
-  function ButtonCard({ title, description = "Description", location }) {
+  function ButtonCard({
+    title,
+    description = "Description",
+    location,
+  }: {
+    title: string;
+    description?: string;
+    location: string;
+  }) {
     return (
       <Card className="w-40 h-40">
         <CardTitle className="mb-5 mt-5">{title}</CardTitle>
