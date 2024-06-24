@@ -38,17 +38,17 @@ function HomePage() {
         <ButtonCard
           title="Aufgaben"
           description="Setze neue Aufgaben"
-          location="/aufgaben"
+          location="aufgaben"
         />
         <ButtonCard
           title="Leute"
           description="Setze neue Leute"
-          location="/people"
+          location="people"
         />
         <ButtonCard
           title="Ausschließen"
           description="Schließe Leute aus den Aufgaben"
-          location="/ausschließen"
+          location="ausschließen"
         />
       </div>
       <Randomizer />
