@@ -8,7 +8,7 @@ import NotFoundPage from "./NotFoundPage";
 import { HashRouter as Router } from "react-router-dom";
 
 export const AppRoutes: React.FC = () => (
-  <Router basename="/thejobgenerator">
+  <Router>
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/aufgaben" element={<Aufgaben />} />
