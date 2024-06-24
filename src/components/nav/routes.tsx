@@ -9,11 +9,7 @@ import NotFoundPage from "./NotFoundPage";
 export const AppRoutes: React.FC = () => (
   <Router>
     <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/aufgaben" element={<Aufgaben />} />
-      <Route path="/people" element={<People />} />
-      <Route path="/ausschließen" element={<Out />} />
-      <Route path="*" element={<NotFoundPage />} />
+      <HomePage></HomePage>
     </Routes>
   </Router>
 );
