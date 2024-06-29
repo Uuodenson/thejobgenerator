@@ -4,7 +4,7 @@ import { Card, CardContent, CardTitle } from "../ui/card";
 function Out() {
   const [name, setName] = useState("Aufgabe");
   const [arraygabe, setArragabe] = useState<string[]>([]);
-  let next_aufgabe: Array<string> = [];
+  const [next_aufgabe, setNextAufage] = useState(Array<string>);
   function getchosentext() {
     const selectElement = document.getElementById(
       "aufgaben-liste"
@@ -12,7 +12,7 @@ function Out() {
     const selectedOption = selectElement.options[selectElement.selectedIndex];
     setName(selectedOption.value);
     const storedData = localStorage.getItem(name);
-    next_aufgabe = storedData ? [JSON.parse(storedData)] : [];
+    setNextAufage(storedData ? [JSON.parse(storedData)] : []);
     setArragabe(next_aufgabe);
     console.log(arraygabe);
   }
@@ -50,7 +50,9 @@ function Out() {
                 <Button
                   onClick={() => {
                     if (next_aufgabe.includes(personen)) {
-                      next_aufgabe.splice(next_aufgabe.indexOf(personen), 1);
+                      setNextAufage(
+                        next_aufgabe.splice(next_aufgabe.indexOf(personen), 1)
+                      );
                       alert("Removed");
                     }
                   }}
@@ -60,7 +62,7 @@ function Out() {
                 <Button
                   onClick={() => {
                     if (!next_aufgabe.includes(personen)) {
-                      next_aufgabe.push(personen);
+                      setNextAufage([...next_aufgabe, personen]);
                       alert("Added");
                     }
                   }}
@@ -92,7 +94,7 @@ function Out() {
       >
         Save
       </Button>
-      <h1>Names</h1>
+      <h1>{next_aufgabe.map((aufgabe) => aufgabe + " ")}</h1>
     </div>
   );
 }
