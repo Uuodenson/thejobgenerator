@@ -34,7 +34,11 @@ export default function Randomizer() {
         return (
           <Card>
             <CardTitle>{aufgabe.name}</CardTitle>
-            <CardContent>{personen_array}</CardContent>
+            <CardContent className="flex flex-wrap justify-center gap-x-3">
+              {personen_array.map((person: string) => {
+                return <p>{person}</p>;
+              })}
+            </CardContent>
           </Card>
         );
       })}
