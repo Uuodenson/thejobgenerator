@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "../ui/button";
-import { Card, CardContent, CardTitle } from "../ui/card";
+import { Card, CardTitle } from "../ui/card";
 function Out() {
   const [name, setName] = useState("Aufgabe");
   const [arraygabe, setArragabe] = useState<string[]>([]);
@@ -47,6 +47,7 @@ function Out() {
             ).map((personen: string) => (
               <Card>
                 <CardTitle id={personen}>{personen}</CardTitle>
+                <div className="pb-1"></div>
                 <Button
                   onClick={() => {
                     if (next_aufgabe.includes(personen)) {
@@ -69,7 +70,7 @@ function Out() {
                 >
                   Add
                 </Button>
-                <CardContent>Set</CardContent>
+                <div className="pb-3"></div>
               </Card>
             ))}
           </div>
@@ -85,7 +86,6 @@ function Out() {
       </div>
       {chooseaufgaben()}
       <Button onClick={getchosentext}>Set</Button>
-      <h1>{name}</h1>
       {setup()}
       <Button
         onClick={() =>

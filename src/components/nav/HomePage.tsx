@@ -32,8 +32,8 @@ function HomePage() {
 
   return (
     <div className="pb-5 pt-2.5">
-      <h1>Home Page</h1>
-      <p>Welcome to the home page!</p>
+      <h1 className="text-4xl">Group Work Randomizer</h1>
+      <p className="mb-5">By Kevin</p>
       <div className="flex flex-wrap flex-row justify-center">
         <ButtonCard
           title="Aufgaben"
