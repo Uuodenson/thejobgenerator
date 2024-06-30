@@ -1,10 +1,21 @@
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { Button } from "../ui/button";
 import { Card, CardTitle, CardDescription, CardContent } from "../ui/card";
 import Randomizer from "./ranomizer/Ranomzier";
+import Info from "./info/Info";
 
 function HomePage() {
   const navigate = useNavigate();
+  const [showtutorial, setShowTutorial] = useState(
+    ((localStorage.getItem("showtutorial") || "") as string) === ""
+      ? false
+      : JSON.parse(localStorage.getItem("showtutorial") as string)
+  );
+
+  useEffect(() => {
+    localStorage.setItem("showtutorial", JSON.stringify(showtutorial));
+  }, [showtutorial]);
 
   function ButtonCard({
     title,
@@ -33,7 +44,14 @@ function HomePage() {
   return (
     <div className="pb-5 pt-2.5">
       <h1 className="text-4xl">Group Work Randomizer</h1>
-      <p className="mb-5">By Kevin</p>
+      <label>
+        <input
+          type="checkbox"
+          checked={!showtutorial}
+          onChange={() => setShowTutorial(!showtutorial)}
+        />
+        Show Tutorial
+      </label>
       <div className="flex flex-wrap flex-row justify-center">
         <ButtonCard
           title="Aufgaben"
@@ -52,6 +70,7 @@ function HomePage() {
         />
       </div>
       <Randomizer />
+      {!showtutorial && <Info />}
     </div>
   );
 }

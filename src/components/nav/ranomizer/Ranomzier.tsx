@@ -9,7 +9,7 @@ export default function Randomizer() {
       <Button onClick={() => window.location.reload()} className="mt-3">
         Randomize
       </Button>
-      <div className="flex flex-wrap flex-row justify-center pt-3">
+      <div className="flex justify-center items-center pt-3">
         {aufgaben.map((aufgabe: { name: string }) => {
           const job = JSON.parse(
             localStorage.getItem(`${aufgabe.name}`) || "[]"
@@ -38,7 +38,7 @@ export default function Randomizer() {
           // localStorage.setItem(`${aufgabe.name}`, JSON.stringify(personen_array));
           return (
             <Card>
-              <CardTitle className="pt-5">{aufgabe.name}</CardTitle>
+              <CardTitle className="pt-5 mb-4">{aufgabe.name}</CardTitle>
               <CardContent className="flex flex-wrap justify-center gap-x-3">
                 {personen_array.map((person: string) => {
                   return <p>{person}</p>;
