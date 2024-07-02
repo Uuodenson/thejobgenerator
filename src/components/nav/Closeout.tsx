@@ -61,11 +61,28 @@ function Out() {
                   Remove
                 </Button>
                 <Button
+                  style={{
+                    backgroundColor: next_aufgabe.includes(personen)
+                      ? "green"
+                      : "red",
+                  }}
                   onClick={() => {
                     if (!next_aufgabe.includes(personen)) {
                       setNextAufage([...next_aufgabe, personen]);
                       alert("Added");
+                    } else {
+                      setNextAufage(next_aufgabe.filter((p) => p !== personen));
+                      alert("Removed");
                     }
+                    // Change button color
+                    const button = document.querySelector(
+                      `#${personen} button`
+                    ) as HTMLButtonElement;
+                    button.style.backgroundColor = next_aufgabe.includes(
+                      personen
+                    )
+                      ? "green"
+                      : "red";
                   }}
                 >
                   Add
