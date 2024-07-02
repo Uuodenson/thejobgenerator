@@ -10,28 +10,28 @@ export default function Randomizer() {
         Randomize
       </Button>
       <div className="flex justify-center items-center pt-3">
-        {aufgaben.map((aufgabe: { name: string }) => {
-          const job = JSON.parse(
-            localStorage.getItem(`${aufgabe.name}`) || "[]"
-          );
+        {aufgaben.map((aufgabe: { name: string; lenght: number }) => {
+          const job = JSON.parse(localStorage.getItem(aufgabe.name) || "[]");
+          const lenght = aufgabe.lenght;
           const personen_array: string[] = [];
-          if (personen.length < 2) {
-            personen_array.push("Error", "Error");
+          if (personen.length <= lenght) {
+            for (let i = 0; i < lenght; i++) {
+              personen_array.push("Error");
+            }
           } else {
-            while (personen_array.length < 2) {
+            if (job.length >= lenght) {
+              for (let i = 0; i < lenght; i++) {
+                personen_array.push("Error");
+              }
+            }
+            while (personen_array.length < lenght) {
               const randomPerson =
                 personen[Math.floor(Math.random() * personen.length)];
               if (
                 !job.includes(randomPerson) &&
-                !personen_array.includes(randomPerson as string)
+                !personen_array.includes(randomPerson)
               ) {
-                personen_array.push(randomPerson as string);
-              }
-              if (
-                job.length >= personen.length - 1 ||
-                job.length >= personen.length
-              ) {
-                personen_array.push("Error", "Error");
+                personen_array.push(randomPerson);
               }
             }
           }
