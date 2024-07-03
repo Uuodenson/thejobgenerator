@@ -1,37 +1,41 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "../ui/button";
 import { Card, CardTitle } from "../ui/card";
+
 function Out() {
   const [name, setName] = useState("Aufgabe");
-  const [arraygabe, setArragabe] = useState<string[]>([]);
-  const [next_aufgabe, setNextAufage] = useState(Array<string>);
-  function getchosentext() {
-    const selectElement = document.getElementById(
-      "aufgaben-liste"
-    ) as HTMLSelectElement;
-    const selectedOption = selectElement.options[selectElement.selectedIndex];
-    setName(selectedOption.value);
+  const [next_aufgabe, setNextAufage] = useState<string[]>([]);
+
+  useEffect(() => {
     const storedData = localStorage.getItem(name);
-    setNextAufage(storedData ? [JSON.parse(storedData)] : []);
-    setArragabe(next_aufgabe);
-    console.log(arraygabe);
-  }
+    const parsedData = storedData ? JSON.parse(storedData) : [];
+    setNextAufage(parsedData);
+  }, [name]);
 
   function chooseaufgaben() {
     return (
       <h1>
-        <select name="Aufgaben" id="aufgaben-liste">
+        <select
+          name="Aufgaben"
+          id="aufgaben-liste"
+          onChange={(e) => setName(e.target.value)}
+          value={name}
+        >
+          <option value="Aufgabe">Aufgabe</option>
           {(
             JSON.parse(localStorage.getItem("aufgaben") || "[]") as Array<{
               name: string;
             }>
           ).map((aufgabe) => (
-            <option value={aufgabe.name}>{aufgabe.name}</option>
+            <option key={aufgabe.name} value={aufgabe.name}>
+              {aufgabe.name}
+            </option>
           ))}
         </select>
       </h1>
     );
   }
+
   function setup() {
     const aufgaben = JSON.parse(localStorage.getItem("aufgaben") || "[]");
     const foundAufgabe = aufgaben.find(
@@ -45,15 +49,17 @@ function Out() {
             {(
               JSON.parse(localStorage.getItem("personen") || "[]") as string[]
             ).map((personen: string) => (
-              <Card>
+              <Card key={personen}>
                 <CardTitle id={personen}>{personen}</CardTitle>
                 <div className="pb-1"></div>
                 <Button
+                  style={{
+                    backgroundColor: "black",
+                    color: "white",
+                  }}
                   onClick={() => {
                     if (next_aufgabe.includes(personen)) {
-                      setNextAufage(
-                        next_aufgabe.splice(next_aufgabe.indexOf(personen), 1)
-                      );
+                      setNextAufage(next_aufgabe.filter((p) => p !== personen));
                       alert("Removed");
                     }
                   }}
@@ -65,6 +71,7 @@ function Out() {
                     backgroundColor: next_aufgabe.includes(personen)
                       ? "green"
                       : "red",
+                    color: "white",
                   }}
                   onClick={() => {
                     if (!next_aufgabe.includes(personen)) {
@@ -74,15 +81,6 @@ function Out() {
                       setNextAufage(next_aufgabe.filter((p) => p !== personen));
                       alert("Removed");
                     }
-                    // Change button color
-                    const button = document.querySelector(
-                      `#${personen} button`
-                    ) as HTMLButtonElement;
-                    button.style.backgroundColor = next_aufgabe.includes(
-                      personen
-                    )
-                      ? "green"
-                      : "red";
                   }}
                 >
                   Add
@@ -102,8 +100,7 @@ function Out() {
         <Button onClick={() => window.history.back()}>Back</Button>
       </div>
       {chooseaufgaben()}
-      <Button onClick={getchosentext}>Set</Button>
-      {setup()}
+      <div id="closeout">{setup()}</div>
       <Button
         onClick={() =>
           localStorage.setItem(`${name}`, JSON.stringify(next_aufgabe))
@@ -111,7 +108,6 @@ function Out() {
       >
         Save
       </Button>
-      <h1>{next_aufgabe.map((aufgabe) => aufgabe + " ")}</h1>
     </div>
   );
 }

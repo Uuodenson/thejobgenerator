@@ -14,7 +14,17 @@ export default function Randomizer() {
           const job = JSON.parse(localStorage.getItem(aufgabe.name) || "[]");
           const lenght = aufgabe.lenght;
           const personen_array: string[] = [];
-          if (personen.length <= lenght) {
+          if (personen.length - aufgabe.lenght < job.length) {
+            for (let i = 0; i < lenght; i++) {
+              personen_array.push("Error");
+            }
+          }
+          if (personen.length < lenght - 1) {
+            for (let i = 0; i < lenght; i++) {
+              personen_array.push("Error");
+            }
+          }
+          if (personen.length < lenght) {
             for (let i = 0; i < lenght; i++) {
               personen_array.push("Error");
             }
@@ -38,7 +48,8 @@ export default function Randomizer() {
           // localStorage.setItem(`${aufgabe.name}`, JSON.stringify(personen_array));
           return (
             <Card>
-              <CardTitle className="pt-5 mb-4">{aufgabe.name}</CardTitle>
+              <CardTitle className="pt-5 ">{aufgabe.name}</CardTitle>
+              <p>Anzahl: {aufgabe.lenght}</p>
               <CardContent className="flex flex-wrap justify-center gap-x-3">
                 {personen_array.map((person: string) => {
                   return <p>{person}</p>;
